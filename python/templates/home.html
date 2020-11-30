@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+        <form action="/login">
+            <button type="submit">Login</button>
+        </form>
+        <form action="/accounts">
+            <button type="submit">Get Accounts</button>
+        </form>
+    </body>
+    {% if accounts %}
+        <div>
+            {{ accounts }}
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div>
+            <p style="color: red">{{ error }}</p>
+        </div>
+    {% endif %}
+</html>
