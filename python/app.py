@@ -5,8 +5,8 @@ from flask import Flask, request, session, redirect, render_template
 from dotenv import load_dotenv
 import requests
 
-from python import util
-from python.oauth import rabobank
+import util
+from oauth import rabobank
 
 load_dotenv()
 
