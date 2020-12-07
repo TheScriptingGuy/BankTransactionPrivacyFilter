@@ -47,11 +47,14 @@ def accounts():
         return render_template('home.html', error='No Access Code given, login first.')
 
     # Build request with access code
+    signature = util.build_signature('')
     headers = {'x-ibm-client-id': os.getenv('CLIENT_ID'),
-               'Authorization': 'Bearer ' + access_code}
+               'Authorization': 'Bearer ' + access_code,
+               'signature': signature}
     response = requests.request('GET', f'{BASE_URL}/payments/account-information/ais/accounts',
                                 headers=headers,
                                 cert=('cert.pem', 'key.pem'))
+    print(headers)
     return render_template('home.html', accounts=response.content)
 
 
