@@ -47,14 +47,17 @@ def accounts():
         return render_template('home.html', error='No Access Code given, login first.')
 
     # Build request with access code
-    signature = util.build_signature('')
+    signing_headers, signature = util.build_signature('')
     headers = {'x-ibm-client-id': os.getenv('CLIENT_ID'),
                'Authorization': 'Bearer ' + access_code,
                'signature': signature}
+    headers.update(signing_headers)
+    headers.update(util.get_tpp_certificate())
     response = requests.request('GET', f'{BASE_URL}/payments/account-information/ais/accounts',
                                 headers=headers,
-                                cert=('cert.pem', 'key.pem'))
+                                cert=('python/certs/rabobank_cert.pem', 'python/certs/rabobank_key.pem'))
     print(headers)
+    print(response.headers)
     return render_template('home.html', accounts=response.content)
 
 
