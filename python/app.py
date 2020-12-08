@@ -55,7 +55,7 @@ def accounts():
     headers.update(util.get_tpp_certificate())
     response = requests.request('GET', f'{BASE_URL}/payments/account-information/ais/accounts',
                                 headers=headers,
-                                cert=('python/certs/rabobank_cert.pem', 'python/certs/rabobank_key.pem'))
+                                cert=('certs/rabobank_cert.pem', 'certs/rabobank_key.pem'))
     print(headers)
     print(response.headers)
     return render_template('home.html', accounts=response.content)

@@ -93,7 +93,7 @@ def create_signing_string(headers):
 
 
 def sign_string(signing_string):
-    with open('python/certs/rabobank_key.pem', 'r') as f:
+    with open('certs/rabobank_key.pem', 'r') as f:
         private_key = RSA.import_key(f.read())
     digest = SHA256.new(signing_string.encode('utf-8')) if USE_256 else SHA512.new(signing_string.encode('utf-8'))
     signature = pkcs1_15.new(private_key).sign(digest)
