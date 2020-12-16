@@ -1,0 +1,36 @@
+Kort verslag overleg 20201202
+
+1: Resultaten OAuth van Rens
+Gebruik gemaakt van een projectje met dotnet core. Niet helemaal gelukt. Na dotnetcore overgezet naar python, daar werkte het wel. 
+Er is dus wel een OAuth verbinding, maar de verbinding kan niet verder gelegd worden. 
+
+
+2: Vervolgstappen PSD2 certificaat
+Er is een PSD2 certificaat. Bij de ING is een example sandbox.
+
+Nog kijken naar de ING. Rens en Wessel kijken eerst nog naar Rabo (want die heeft ook een dummy certificaat). Dit is een belangrijke hobbel om te nemen. 
+In de Sandbox kan nu al wel iets gedaan worden, maar zonder het (dummy) certificaat kan nog geen test-data opgehaald worden. 
+
+Waarom Rabobank en niet de Volksbank vraagt Martijn. Er zit al veel tijd in. Wanneer het bij de ene bank lukt, kan de verbinding ook met andere partijen gelegd kunnen worden. akkoord om met de Rabo verder te gaan.
+
+Nu eerst werkzaam krijgen met de sandbox. Daarna zien we verder.
+
+
+3: Feedback Arjan
+Review procesplaten door Arjan, volgt nog. Normaal reageert hij snel, als dat niet zo is kheeft hij er doorgaans een goede reden voor.
+
+4: Herevaluatie Codebase: dotnetcore/python
+Rens is aangelopen tegen de complexiteit van de omgeving. Rens is bezig met de autoriseren. Rens is beter met Python. Voorstel is dat dit deel verdergaat in Python. 
+De Gatekeeper gebruikt dotnet.core. Wat te doen? Besluit: we gebruiken Python. 
+
+
+5: Story Mapping en werkwijze Github
+Wessel laat Sequencemodel zien. Alle relevante stappen moeten beschreven worden. Dat doen we on the fly.
+
+Actie: Excel lijst als csv met headers opslaan.
+
+Actie MvdV: voeg user stories toe
+
+
+6: opname in nieuwsbrief.
+Niet behandeld, Martijn stuurt PSd2 nieuwsbrief uit.
