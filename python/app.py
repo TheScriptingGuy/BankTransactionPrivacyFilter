@@ -5,7 +5,7 @@ from flask import Flask, request, session, redirect, render_template
 from dotenv import load_dotenv
 import requests
 
-from util.bearer import get_access_code
+from util.access_code import get_access_code
 from util.headers import get_headers
 from oauth import rabobank
 
@@ -47,7 +47,6 @@ def accounts():
     except KeyError:
         return render_template('home.html', error='No Access Code given, login first.')
 
-    # Build request with access code
     headers = get_headers(access_code)
     response = requests.request('GET', f'{BASE_URL}/payments/account-information/ais/accounts',
                                 headers=headers,
