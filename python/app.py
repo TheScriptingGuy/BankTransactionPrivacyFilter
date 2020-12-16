@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 import requests
 
 from util.bearer import get_access_code
-from util.signature import build_signature
-from util.tpp_signature import get_tpp_certificate
+from util.headers import get_headers
 from oauth import rabobank
 
 load_dotenv()
@@ -49,12 +48,7 @@ def accounts():
         return render_template('home.html', error='No Access Code given, login first.')
 
     # Build request with access code
-    signing_headers, signature = build_signature('')
-    headers = {'x-ibm-client-id': os.getenv('CLIENT_ID'),
-               'Authorization': 'Bearer ' + access_code,
-               'signature': signature}
-    headers.update(signing_headers)
-    headers.update(get_tpp_certificate())
+    headers = get_headers(access_code)
     response = requests.request('GET', f'{BASE_URL}/payments/account-information/ais/accounts',
                                 headers=headers,
                                 cert=('certs/rabobank_cert.pem', 'certs/rabobank_key.pem'))
