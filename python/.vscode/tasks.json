@@ -1,0 +1,57 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "docker-compose-start",
+			"type": "shell",
+			"command": "docker-compose up --build -d",
+			"isBackground": true,
+			"problemMatcher": [
+			  {
+				"pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3, }],
+				"background": {
+				  "activeOnStart": true,
+				  "beginsPattern": "^(Building py-service)$",
+				  "endsPattern": "^(Creating|Recreating|Starting) (py-container) ... (done)$",
+				}
+			  },
+			],
+		  },
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "python",
+			"dockerBuild": {
+				"tag": "general:latest",
+				"dockerfile": "${workspaceFolder}/Dockerfile",
+				"context": "${workspaceFolder}",
+				"pull": true
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"dockerRun": {
+				"env": {
+					"FLASK_APP": "helloapp.webapp:app",
+					"FLASK_ENV": "development"
+				}
+			},
+			"python": {
+				"args": [
+					"run",
+					"--no-debugger",
+					"--no-reload",
+					"--host",
+					"0.0.0.0",
+					"--port",
+					"8000"
+				],
+				"module": "flask"
+			}
+		}
+	]
+}

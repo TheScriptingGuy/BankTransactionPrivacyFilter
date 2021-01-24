@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  general:
+    image: general
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
+      - 5678:5678
+    environment:
+      - FLASK_APP=webapp:app
+      - FLASK_ENV=development

@@ -1,5 +1,7 @@
 import os
 import time
+import shutil
+import csv
 
 from flask import Flask, request, session, redirect, render_template
 from dotenv import load_dotenv
@@ -15,7 +17,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv('APP_SECRET')
 
 BASE_URL = os.getenv('BASE_URL')
-
 
 @app.route('/')
 def hello_world():
@@ -40,6 +41,20 @@ def callback():
     return redirect('/')
 
 
+@app.route('/filter')
+def filter():
+    print('hello')
+    response = requests.request('GET',  "https://psd2meniet.nl/wp-content/uploads/2020/12/PSD2meniet-register-rekeningnummers-v20201204.csv")
+    decoded_content = response.content.decode('utf-16')
+
+    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+    my_list = list(cr)
+    for row in my_list:
+        print(row)
+
+    return render_template('home.html', accounts=response.content)
+
+
 @app.route('/accounts')
 def accounts():
     try:
@@ -51,10 +66,12 @@ def accounts():
     response = requests.request('GET', f'{BASE_URL}/payments/account-information/ais/accounts',
                                 headers=headers,
                                 cert=('certs/rabobank_cert.pem', 'certs/rabobank_key.pem'))
+    print(requests)
     print(headers)
     print(response.headers)
+    print(response.content)
     return render_template('home.html', accounts=response.content)
 
 
 if __name__ == '__main__':
-    app.run(ssl_context=('cert.pem', 'key.pem'))
+    app.run(ssl_context=('certs/rabobank_cert.pem', 'certs/rabobank_key.pem'))
